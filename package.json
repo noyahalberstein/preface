@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "jest"
+    "test": "jest",
+    "prod": "next build && next start"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
