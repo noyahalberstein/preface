@@ -1,5 +1,5 @@
 "use client";
-import { getStatisticsnData } from "@/api/getReconciliationData";
+import { getStatisticsnData } from "@/api/getStatisticsnData";
 import { Box, Skeleton } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { TotalNumbers } from "./Stats/TotalNumbers";
