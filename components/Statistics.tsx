@@ -25,8 +25,17 @@ export const Statistices = () => {
   return data && !isLoading ? (
     <Box display={"flex"} flexDirection={"column"} gap={"20px"}>
       <TotalNumbers {...data.numbers_stats} />
+      <Typography fontWeight={600} fontSize={32} alignSelf={"center"}>
+        Claims per patient
+      </Typography>
       <ClaimsPerPatient data={data.claims_per_patient} />
+      <Typography fontWeight={600} fontSize={32} alignSelf={"center"}>
+        Invoices per claim
+      </Typography>
       <InvoicesPerClaim data={data.invoices_per_claim} />
+      <Typography fontWeight={600} fontSize={32} alignSelf={"center"}>
+        Reconciliation stats
+      </Typography>
       <ReconcileData count={data.reconcile_count} />
     </Box>
   ) : (

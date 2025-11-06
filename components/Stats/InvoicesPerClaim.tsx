@@ -38,6 +38,8 @@ export const InvoicesPerClaim = ({
       flexDirection={"row"}
       justifyContent={"center"}
       gap={"30px"}
+      bgcolor={"#f1f1f7"}
+      padding={"20px"}
     >
       <Paper sx={{ height: 300, width: "70%" }}>
         <DataGrid

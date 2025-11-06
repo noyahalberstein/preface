@@ -3,7 +3,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
 import { useQuery } from "@tanstack/react-query";
 import { getReconciliationData } from "@/api/getReconciliationData";
-import { Skeleton } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
 
 const COLUMN_WIDTH = 176;
 
@@ -83,15 +83,17 @@ export const ReconcileTable = () => {
   return isLoading ? (
     <Skeleton variant="rounded" width={"100%"} height={600} />
   ) : (
-    <Paper sx={{ height: 600, width: "100%" }}>
-      <DataGrid
-        rows={data || []}
-        columns={columns}
-        initialState={{ pagination: { paginationModel } }}
-        pageSizeOptions={[10, 50, 100]}
-        sx={{ border: 0 }}
-        getRowId={(row) => row.claim_id}
-      />
-    </Paper>
+    <Box bgcolor={"#f1f1f7"} padding={"20px"}>
+      <Paper sx={{ height: 600, width: "100%" }}>
+        <DataGrid
+          rows={data || []}
+          columns={columns}
+          initialState={{ pagination: { paginationModel } }}
+          pageSizeOptions={[10, 50, 100]}
+          sx={{ border: 0 }}
+          getRowId={(row) => row.claim_id}
+        />
+      </Paper>
+    </Box>
   );
 };

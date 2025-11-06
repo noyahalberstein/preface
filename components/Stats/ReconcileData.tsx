@@ -9,6 +9,8 @@ export const ReconcileData = ({ count }: { count: ReconcileCountItem[] }) => {
       flexDirection="row"
       gap="20px"
       justifyContent={"center"}
+      bgcolor={"#f1f1f7"}
+      padding={"20px"}
     >
       {count.map((item) => (
         <StatsCard title={item.status} value={item.count} key={item.status} />

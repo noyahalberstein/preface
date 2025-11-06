@@ -13,6 +13,8 @@ export const TotalNumbers = ({
       flexDirection="row"
       gap="20px"
       justifyContent={"center"}
+      bgcolor={"#f1f1f7"}
+      padding={"20px"}
     >
       <StatsCard title="Total Patients" value={total_patients} />
       <StatsCard title="Total Claims" value={total_claims} />
