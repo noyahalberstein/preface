@@ -1,9 +1,5 @@
-import { Box } from "@mui/material";
+import { redirect } from "next/navigation";
 
-const Home = () => {
-  return <Box>
-    Hello World
-  </Box>
+export default function Page() {
+  redirect("/stats");
 }
-
-export default Home
