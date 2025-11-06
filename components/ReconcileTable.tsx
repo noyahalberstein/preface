@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getReconciliationData } from "@/api/getReconciliationData";
 import { Skeleton } from "@mui/material";
 
-const COLUMN_WIDTH = 175;
+const COLUMN_WIDTH = 176;
 
 const columns: GridColDef[] = [
   {

@@ -7,12 +7,16 @@ import {
   ListItem,
   Paper,
   IconButton,
+  Button,
 } from "@mui/material";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import CloseIcon from "@mui/icons-material/Close";
+import { useMutation } from "@tanstack/react-query";
+import { uploadFile } from "@/api/uploadFile";
+import { FileType } from "@/types/file";
 
-export const FileUpload = () => {
+export const FileUpload = ({ type }: { type: FileType }) => {
   const [files, setFiles] = useState<File[]>([]);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -25,6 +29,24 @@ export const FileUpload = () => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
+  const { mutate, isPending } = useMutation({
+    mutationFn: ({ files, type }: { files: File[]; type: FileType }) =>
+      uploadFile(files, type),
+    onSuccess: () => {
+      alert("Files uploaded successfully!");
+      setFiles([]);
+    },
+    onError: (err: unknown) => {
+      console.error(err);
+      alert("Failed to upload files");
+    },
+  });
+
+  const handleUpload = () => {
+    if (files.length === 0) return;
+    mutate({ files, type });
+  };
+
   return (
     <Box
       display="flex"
@@ -33,6 +55,7 @@ export const FileUpload = () => {
       width="100%"
       maxWidth={600}
       mx="auto"
+      height={"100%"}
     >
       <Paper
         {...getRootProps()}
@@ -45,7 +68,7 @@ export const FileUpload = () => {
           textAlign: "center",
           cursor: "pointer",
           transition: "border-color 0.3s, background-color 0.3s",
-          height: 200,
+          height: 300,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -58,13 +81,18 @@ export const FileUpload = () => {
           color={isDragActive ? "primary" : "textSecondary"}
         >
           {isDragActive
-            ? "Drop the claim file here..."
-            : "Drag & drop a claim file here, or click to select"}
+            ? `Drop the ${type} file here...`
+            : `Drag & drop ${type} file here, or click to select`}
         </Typography>
       </Paper>
 
       {files.length > 0 && (
-        <Paper elevation={2} sx={{ padding: 2 }}>
+        <Paper
+          elevation={2}
+          sx={{
+            padding: 2,
+          }}
+        >
           <Typography variant="h6" gutterBottom>
             Selected file{files.length > 1 ? "s" : ""}:
           </Typography>
@@ -93,6 +121,14 @@ export const FileUpload = () => {
               </ListItem>
             ))}
           </List>
+          <Button
+            variant="contained"
+            sx={{ marginTop: "20px", width: "100%", color: "white" }}
+            onClick={handleUpload}
+            disabled={isPending}
+          >
+            {isPending ? "Uploading..." : "Upload"}
+          </Button>
         </Paper>
       )}
     </Box>
